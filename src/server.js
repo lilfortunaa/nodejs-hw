@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import pinoHttp from 'pino-http';
-import dotenv from 'dotenv';
+import  'dotenv/config';
 
-dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3030;
 
 app.use(cors());
 app.use(express.json());
@@ -19,11 +19,11 @@ app.get('/notes', (req, res) => {
 
 app.get('/notes/:noteId',(req,res) =>{
   const { noteId } = req.params;
-  res.status(200).json({"message": `Retrieved note with ID: ${noteId}`});;
+  res.status(200).json({"message": `Retrieved note with ID: ${noteId}`});
 });
 
 
-app.get('/test-error', () => {
+app.get('/test-error', (req,res) => {
   throw new Error('Simulated server error');
 });
 
@@ -36,7 +36,7 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   req.log.error(err);
   res.status(500).json({
-    "message": "Simulated server error"
+    message: err.message
   });
 });
 
