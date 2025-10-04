@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(logger);
 
-app.use("/notes", notesRoutes);
+app.use("/", notesRoutes);
 app.get("/test-error", (req, res) => {
   throw new Error("Simulated server error");
 });
