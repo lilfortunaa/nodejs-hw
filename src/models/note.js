@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {  model } from "mongoose";
 
 const noteSchema = new mongoose.Schema(
   {
@@ -32,8 +33,14 @@ const noteSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "notes", 
+    collection: "notes",
   }
 );
 
-export const Note = mongoose.model("Note", noteSchema);
+noteSchema.index({title: 'text'});
+
+export const Note = model("Note", noteSchema);
+
+
+
+
