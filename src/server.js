@@ -22,16 +22,11 @@ app.use(cookieParser());
 app.use(logger);
 
 app.use("/", notesRoutes);
-app.get("/test-error", (req, res) => {
-  throw new Error("Simulated server error");
-});
-
 app.use(authRoutes);
-app.use(notesRoutes);
 app.use(userRoutes);
 
-app.use(errors());
 app.use(notFoundHandler);
+app.use(errors());
 app.use(errorHandler);
 
 
